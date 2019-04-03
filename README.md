@@ -1,6 +1,7 @@
 webpack4.x学习
 ---
----
+![avatar](https://img.shields.io/badge/webpack-4.29.6-blue.svg)
+![avatar](https://img.shields.io/badge/devServer-3.2.1-blue.svg)
 
 ### 骨架
 ```javascript
