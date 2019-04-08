@@ -146,7 +146,7 @@ const Event = (function () {
     trigger = null,
     remove = null;
 
-  listen = function (key, fn) {
+  listen = function (key, fn) { // 添加
     if (!clienList[key]) {
       clienList[key] = [];
     }
@@ -154,10 +154,9 @@ const Event = (function () {
     clienList[key].push(fn);
   };
 
-  trigger = function () {
+  trigger = function () { // 发布
     let key = [...arguments].shift(),
       fns = clienList[key];
-    console.log(arguments)
     if (!fns || fns.length === 0) return;
 
     for (let i = 0, len = fns.length; i < len; i++) {
@@ -165,7 +164,7 @@ const Event = (function () {
     }
   };
 
-  remove = function (key, fn) {
+  remove = function (key, fn) { // 取消删除
     let fns = clienList[key];
 
     if (!fns) return; // 如果key对应的消息没有被人订阅，则直接返回
@@ -194,3 +193,18 @@ Event.listen('squareMeter100', function (squareMeter, price) { // 小红订阅�
 
 // Event.remove('squareMeter100')
 Event.trigger('squareMeter100', 2000000); // 输出：2000000
+
+let a = (function () {
+  let count = 0;
+  let btn = document.querySelector("#btn");
+  btn.addEventListener("click", () => {
+    Event.trigger('add', count++);
+  })
+})();
+
+let b = (function () {
+  let show = document.querySelector("#show");
+  Event.listen('add', (type, count) => {
+    show.innerHTML = count;
+  })
+})();
