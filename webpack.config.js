@@ -1,5 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -7,15 +9,16 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].[hash:20].js'
   },
   module: {},
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'hello world',
       hash: true,
       minify: {
-        collapseWhitespace: true,
+        collapseWhitespace: true, // 折叠空行
         removeAttributeQuotes: true
       },
       template: './index.html'
@@ -27,7 +30,6 @@ module.exports = {
     compress: true,
     hot: true,
     open: true,
-    compress: true,
     host: 'localhost'
   },
   mode: "development"
