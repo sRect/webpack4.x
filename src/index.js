@@ -1,3 +1,6 @@
+let str = require("./a.js");
+document.write(str + 1);
+
 const fetchData = () => {
   return new Promise((resolve, reject) => {
     fetch('https://api.github.com/users/chriscoyier/repos').then(res => {
@@ -208,3 +211,7 @@ let b = (function () {
     show.innerHTML = count;
   })
 })();
+
+if (module.hot) {
+  module.hot.accept();
+}

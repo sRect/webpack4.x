@@ -26,19 +26,20 @@ module.exports = {
         removeAttributeQuotes: true
       },
       template: './index.html',
-      chunks: ['index'] // index.html 引入index.js
+      chunks: ['index', 'a'] // index.html 引入index.js
     }),
-    new HtmlWebpackPlugin({
-      filename: 'a.html',
-      title: 'hello world',
-      hash: true,
-      minify: {
-        collapseWhitespace: true, // 折叠空行
-        removeAttributeQuotes: true
-      },
-      template: './index.html',
-      chunks: ['a'] // a.html引入a.js
-    })
+    // new HtmlWebpackPlugin({
+    //   filename: 'a.html',
+    //   title: 'hello world',
+    //   hash: true,
+    //   minify: {
+    //     collapseWhitespace: true, // 折叠空行
+    //     removeAttributeQuotes: true
+    //   },
+    //   template: './index.html',
+    //   chunks: ['a'] // a.html引入a.js
+    // }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
