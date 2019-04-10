@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "build": "webpack"
   },
   "keywords": [],
