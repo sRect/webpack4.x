@@ -5,11 +5,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   // entry: './src/index.js',
-  // entry: ['./src/index.js', './src/a.js'], // 将两个文件打包成一个
-  entry: { // 多入口
-    index: './src/index.js',
-    a: './src/a.js'
-  },
+  entry: ['./src/index.js', './src/a.js'], // 将两个文件打包成一个
+  // entry: { // 多入口
+  //   index: './src/index.js',
+  //   a: './src/a.js'
+  // },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:20].js' // 多出口
@@ -26,7 +26,7 @@ module.exports = {
         removeAttributeQuotes: true
       },
       template: './index.html',
-      chunks: ['index', 'a'] // index.html 引入index.js
+      // chunks: ['index', 'a'] // index.html 引入index.js
     }),
     // new HtmlWebpackPlugin({
     //   filename: 'a.html',

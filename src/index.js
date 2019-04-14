@@ -1,5 +1,6 @@
 let str = require("./a.js");
-document.write(str + 1);
+document.write(str);
+document.body.style.fontSize = "34px";
 
 const fetchData = () => {
   return new Promise((resolve, reject) => {
