@@ -14,7 +14,26 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:20].js' // 多出口
   },
-  module: {},
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        // use: ['style-loader', 'css-loader'] // 从右往左
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' }
+        ]
+      }
+    ]
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({

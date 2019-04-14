@@ -1,3 +1,6 @@
+import("./index.css");
+import("./a.less");
+
 let str = require("./a.js");
 document.write(str);
 document.body.style.fontSize = "34px";
