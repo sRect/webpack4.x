@@ -25,7 +25,8 @@ module.exports = {
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader' }
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' }
           ]
         })
       },
@@ -35,6 +36,7 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             { loader: 'css-loader' },
+            { loader: 'postcss-loader' },
             { loader: 'less-loader' }
           ]
         })
