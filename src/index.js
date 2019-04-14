@@ -1,5 +1,4 @@
-import("./index.css");
-import("./a.less");
+import "./index.css";
 
 let str = require("./a.js");
 document.write(str);

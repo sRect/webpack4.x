@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   // entry: './src/index.js',
@@ -19,18 +20,20 @@ module.exports = {
       {
         test: /\.css$/,
         // use: ['style-loader', 'css-loader'] // 从右往左
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' }
-        ]
+        use: ExtractTextWebpackPlugin.extract({
+          use: [
+            { loader: 'css-loader' }
+          ]
+        })
       },
       {
         test: /\.less$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'less-loader' }
-        ]
+        use: ExtractTextWebpackPlugin.extract({
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'less-loader' }
+          ]
+        })
       }
     ]
   },
@@ -58,7 +61,10 @@ module.exports = {
     //   template: './index.html',
     //   chunks: ['a'] // a.html引入a.js
     // }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextWebpackPlugin({
+      filename: 'css/index.css'
+    })
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
