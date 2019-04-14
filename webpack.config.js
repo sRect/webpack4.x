@@ -1,8 +1,10 @@
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const PurifycssPlugin = require('purifycss-webpack');
 
 module.exports = {
   // entry: './src/index.js',
@@ -21,6 +23,7 @@ module.exports = {
         test: /\.css$/,
         // use: ['style-loader', 'css-loader'] // 从右往左
         use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
           use: [
             { loader: 'css-loader' }
           ]
@@ -29,6 +32,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
           use: [
             { loader: 'css-loader' },
             { loader: 'less-loader' }
@@ -39,6 +43,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new ExtractTextWebpackPlugin({
+      filename: 'css/index.css',
+      disable: process.env.NODE_ENV === 'development' ? true : false // 是否禁用
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       title: 'hello world',
@@ -61,10 +69,11 @@ module.exports = {
     //   template: './index.html',
     //   chunks: ['a'] // a.html引入a.js
     // }),
+    // 消除无用的css
+    new PurifycssPlugin({
+      paths: glob.sync(path.join(__dirname, 'src/*.html'))
+    }),
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextWebpackPlugin({
-      filename: 'css/index.css'
-    })
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
