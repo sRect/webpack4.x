@@ -35,7 +35,7 @@ module.exports = {
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader' },
+            { loader: 'css-loader', options: { importLoaders: 1 } },
             { loader: 'postcss-loader' }
           ]
         })
@@ -50,7 +50,18 @@ module.exports = {
             { loader: 'less-loader' }
           ]
         })
-      }
+      },
+      {
+        test: /\.(png|jpg|gif|ttf|eot|woff(2)?)(\?[=a-z0-9]+)?$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            outputPath: 'images/',
+            name: '[name]_[hash:7].[ext]'
+          }
+        }]
+      },
     ]
   },
   optimization: {
@@ -104,9 +115,9 @@ module.exports = {
     //   chunks: ['a'] // a.html引入a.js
     // }),
     // 消除无用的css
-    new PurifycssPlugin({
-      paths: glob.sync(path.join(__dirname, 'src/*.html'))
-    }),
+    // new PurifycssPlugin({
+    //   paths: glob.sync(path.join(__dirname, 'src/*.html'))
+    // }),
     new webpack.HotModuleReplacementPlugin(),
     new UglifyjsWebpackPlugin({
       exclude: /\/node_modules/,

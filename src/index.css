@@ -3,3 +3,10 @@ body {
   background: gold;
   transform: translate(45deg);
 }
+
+.img {
+  width: 200px;
+  height: 200px;
+  background: url('./img/img.png') center center no-repeat;
+  background-size: contain;
+}
