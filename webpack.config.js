@@ -9,7 +9,7 @@ const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin'); // 混淆压�
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 module.exports = {
-  // devtool: 'inline-source-map',
+  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : 'source-map',
   // entry: './src/index.js',
   entry: ['./src/index.js', './src/a.js'], // 将两个文件打包成一个
   // entry: { // 多入口
@@ -19,6 +19,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:20].js' // 多出口
+  },
+  resolve: {
+    // 能够使用户在引入模块时不带扩展
+    extensions: ['.js', '.json', '.vue', 'css', 'less'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': path.resolve(__dirname, '../src')
+    }
   },
   module: {
     rules: [
@@ -118,7 +126,7 @@ module.exports = {
     // new PurifycssPlugin({
     //   paths: glob.sync(path.join(__dirname, 'src/*.html'))
     // }),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(), // 热更新
     new UglifyjsWebpackPlugin({
       exclude: /\/node_modules/,
       parallel: true,
@@ -144,5 +152,5 @@ module.exports = {
     open: true,
     host: 'localhost'
   },
-  mode: "development"
+  mode: process.env.NODE_ENV === 'development' ? "development" : "production"
 }

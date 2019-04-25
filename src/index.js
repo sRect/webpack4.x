@@ -1,6 +1,6 @@
 import "./index.css";
 
-let str = require("./a.js");
+let str = require("./a");
 document.write(str);
 document.body.style.fontSize = "34px";
 
