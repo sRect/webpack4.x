@@ -7,6 +7,7 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'); // 分�
 const PurifycssPlugin = require('purifycss-webpack'); // 消除无用的css
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin'); // 混淆压缩js
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : 'source-map',
@@ -36,6 +37,11 @@ module.exports = {
           loader:'babel-loader',
         },
         exclude:/node_modules/
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader'],
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -142,7 +148,8 @@ module.exports = {
         ie8: false,
         keep_fnames: false,
       },
-    })
+    }),
+    new VueLoaderPlugin(), // 它的职责是将你定义过的其它规则复制并应用到 .vue 文件里相应语言的块
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
