@@ -91,7 +91,7 @@ module.exports = {
         vendor: {  // 抽离第三方插件
           test: /node_modules/, // 指定是node_modules下的第三方包
           chunks: 'initial',
-          minChunks: 2,
+          minChunks: 1,
           maxInitialRequests: 5,
           minSize: 2,
           name: 'vendor', // 打包后的文件名，任意命名
@@ -135,12 +135,13 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(), // 热更新
     new UglifyjsWebpackPlugin({
       exclude: /\/node_modules/,
-      parallel: true,
-      sourceMap: true,
       uglifyOptions: {
-        warnings: false,
         parse: {},
-        compress: {},
+        compress: {
+          warnings: false, // 去除警告
+          drop_debugger: true, // 去除debugger
+          drop_console: true // 去除console.log
+        },
         mangle: true, // Note `mangle.properties` is `false` by default.
         output: null,
         toplevel: false,
@@ -148,6 +149,9 @@ module.exports = {
         ie8: false,
         keep_fnames: false,
       },
+      // cache: true, // 开启缓存
+      parallel: true, // 平行压缩
+      sourceMap: true
     }),
     new VueLoaderPlugin(), // 它的职责是将你定义过的其它规则复制并应用到 .vue 文件里相应语言的块
   ],
