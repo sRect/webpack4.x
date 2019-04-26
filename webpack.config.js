@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'); // 分离css
 const PurifycssPlugin = require('purifycss-webpack'); // 消除无用的css
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin'); // 混淆压缩js
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"); // 压缩css
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -154,6 +155,7 @@ module.exports = {
       sourceMap: true
     }),
     new VueLoaderPlugin(), // 它的职责是将你定义过的其它规则复制并应用到 .vue 文件里相应语言的块
+    new OptimizeCSSAssetsPlugin({}) 
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
