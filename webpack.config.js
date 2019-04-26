@@ -59,6 +59,7 @@ module.exports = {
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
           use: [
+            { loader: 'vue-style-loader' },
             { loader: 'css-loader' },
             { loader: 'postcss-loader' },
             { loader: 'less-loader' }
