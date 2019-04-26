@@ -1,7 +1,7 @@
 import "./index.css";
 
 let str = require("./a");
-document.write(str);
+document.querySelector(".p").innerHTML = str;
 document.body.style.fontSize = "34px";
 
 const fetchData = () => {
