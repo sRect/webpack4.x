@@ -59,7 +59,6 @@ module.exports = {
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'vue-style-loader' },
             { loader: 'css-loader' },
             { loader: 'postcss-loader' },
             { loader: 'less-loader' }
@@ -104,7 +103,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new ExtractTextWebpackPlugin({
-      filename: 'css/index.css',
+      filename: 'css/[name].[hash:20].css',
       disable: process.env.NODE_ENV === 'development' ? true : false // 是否禁用(development下禁用，因为要热更新)
     }),
     new HtmlWebpackPlugin({
