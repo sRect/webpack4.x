@@ -1,6 +1,6 @@
 @import url("./a.less");
 body {
-  background: gold;
+  background: #ccc;
   transform: translate(45deg);
 }
 

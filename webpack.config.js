@@ -13,7 +13,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
   devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : 'source-map',
   // entry: './src/index.js',
-  entry: ['./src/index.js', './src/a.js', './src/main.js'], // 将两个文件打包成一个
+  entry: ['./src/index.js', './src/a.js', './src/main.js', './src/mobx.js'], // 将两个文件打包成一个
   // entry: { // 多入口
   //   index: './src/index.js',
   //   a: './src/a.js'
