@@ -45,8 +45,6 @@ class Store {
   // }
 
   @computed get filterItemList() {
-    console.log("filterItemList-----")
-    console.log(this.itemList)
     return this.filterType === ALL 
       ? this.itemList 
       : this.itemList.filter(item => item.isComplete === this.filterTree[this.filterType]);
@@ -65,30 +63,15 @@ class Store {
     this.itemContent = e.target.value;
   }
 
-  @action.bound removeItem(ID) { // 删除事件
+  @action.bound removeItem(id) { // 删除事件
     let copyList = JSON.parse(JSON.stringify(this.itemList));
-    // this.itemList = this.itemList.filter(item => {
-    //   return item.id !== ID;
-    // })
-    for (let i = 0, len = copyList.length; i < len; i++) {
-      if (copyList[i].id === ID) {
-        copyList.splice(i, 1);
-        i--;
-      }
-    }
-
-    this.itemList = copyList;
-
-    console.log("removeItem-----")
-    console.log(this.itemList)
+    this.itemList = this.itemList.filter(item => item.id !== id);
   }
 }
 
 const store = new Store();
 
 autorun(() => {
-  console.log("autorun-----")
-  console.log(store.filterItemList)
   let itemList = document.querySelector("#itemList");
   let str = "";
 
@@ -126,7 +109,7 @@ class TodoList {
     this.itemList.addEventListener("click", e => {
       if(e.target.nodeName.toLowerCase() === "button") {
         let id = e.target.dataset["id"];
-        store.removeItem(id);
+        store.removeItem(parseInt(id));
       }
     })
   }
