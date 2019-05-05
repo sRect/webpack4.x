@@ -13,10 +13,13 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
   devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : 'source-map',
   // entry: './src/index.js',
-  entry: ['./src/index.js', './src/a.js', './src/main.js', './src/mobx.js'], // 将两个文件打包成一个
+  entry: ['./src/index.js', './src/a.js', './src/main.js', './src/mobx.js', './src/todolist.js'], // 将两个文件打包成一个
   // entry: { // 多入口
   //   index: './src/index.js',
-  //   a: './src/a.js'
+  //   a: './src/a.js',
+  //   main: './src/main.js',
+  //   mobx: './src/mobx.js',
+  //   todolist: './src/todolist.js'
   // },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -116,7 +119,7 @@ module.exports = {
         removeAttributeQuotes: true
       },
       template: './index.html',
-      // chunks: ['index', 'a'] // index.html 引入index.js
+      // chunks: ['index', 'a', 'main', 'mobx', 'todolist' ] // index.html 引入index.js
     }),
     // new HtmlWebpackPlugin({
     //   filename: 'a.html',
