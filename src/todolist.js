@@ -61,6 +61,7 @@ class Store {
       isComplete: false
     });
     this.itemContent = '';
+    document.querySelector("#todoInput").value = "";
   }
   
   @action.bound inputChange(e) { // 输入框事件
@@ -68,7 +69,6 @@ class Store {
   }
 
   @action.bound removeItem(id) { // 删除事件
-    let copyList = JSON.parse(JSON.stringify(this.itemList));
     this.itemList = this.itemList.filter(item => item.id !== id);
   }
 }
