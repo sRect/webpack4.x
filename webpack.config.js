@@ -143,8 +143,8 @@ module.exports = {
         parse: {},
         compress: {
           warnings: false, // 去除警告
-          drop_debugger: true, // 去除debugger
-          drop_console: true // 去除console.log
+          drop_debugger: false, // 去除debugger
+          drop_console: false // 去除console.log
         },
         mangle: true, // Note `mangle.properties` is `false` by default.
         output: null,
