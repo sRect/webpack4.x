@@ -51,6 +51,10 @@ class Store {
   }
 
   @action.bound addItem() { // 添加事件
+    if (!this.itemContent) {
+      alert('添加项不可为空！');
+      return;
+    }
     this.itemList.push({
       id: new Date().getTime(),
       content: this.itemContent,
@@ -73,9 +77,15 @@ const store = new Store();
 
 autorun(() => {
   let itemList = document.querySelector("#itemList");
+  let totalNum = document.querySelector("#totalNum");
+  let completeNum = document.querySelector("#completeNum");
+  let unCompleteNum = document.querySelector("#unCompleteNum");
   let str = "";
+  let completeCount = 0;
 
   for (let i = 0, len = store.filterItemList.length; i < len; i++) {
+    store.filterItemList[i].isComplete ? completeCount++ : undefined;
+
     str += `<li> 
       <span> ${store.filterItemList[i].content} </span> 
       <i> ${store.filterItemList[i].isComplete} </i> 
@@ -84,6 +94,9 @@ autorun(() => {
   }
 
   itemList.innerHTML = str;
+  totalNum.innerHTML = store.filterItemList.length;
+  completeNum.innerHTML = completeCount;
+  unCompleteNum.innerHTML = store.filterItemList.length - completeCount;
 })
 
 class TodoList {
