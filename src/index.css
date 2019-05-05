@@ -10,3 +10,30 @@ body {
   background: url('./img/img.png') center center no-repeat;
   background-size: contain;
 }
+
+.todoListWrap {
+  border: 1px solid #ddd;
+}
+
+.todoListWrap .body {
+  font-size: 18px;
+}
+
+.todoListWrap .body ul li {
+  list-style: none;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 4px;
+}
+
+.todoListWrap .body ul li i {
+  font-size: 14px;
+}
+
+.todoListWrap .body ul li button {
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.todoListWrap .footer {
+  font-size: 18px;
+}

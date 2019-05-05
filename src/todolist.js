@@ -44,4 +44,8 @@ class TodoList {
   @computed filterItemList = (currentType) => {
     return this.filterType === ALL ? this.itemList : this.itemList.filter(item => item.isComplete === currentType);
   }
+
+  @action.addItem addItem = () => {
+    console.log(e);
+  }
 }
